@@ -35,8 +35,8 @@ int str = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("номер столбца: ");
 int stlb = Convert.ToInt32(Console.ReadLine());
 
-if (str >= Sim.GetLength(0) || stlb >= Sim.GetLength(1))
+if (str >= Sim.GetLength(0) || stlb >= Sim.GetLength(1) || (str < 0) || (stlb < 0))
     Console.WriteLine("Элемента с введенным индексом нет в таблице.");
-else Console.WriteLine(Sim[str,stlb]);
+else Console.WriteLine("Значение элемента с индексами [" + str + ", " + stlb + "]: " + Sim[str,stlb]);
 
 
