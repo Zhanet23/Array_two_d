@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Runtime.InteropServices;
 
 void PrintArray(int[,] table) // метод печает массив
@@ -124,6 +125,92 @@ PrintArray(Sim);
 
 //Find_Index(Sim); // задача 3
 //Find_Index1(Sim);  //Задача 3.1
+
+
+
+
+
+//______________________________________________________________________________
+// метод ищет минимальный элемент массива, его индексы
+// и убирает столбец с индексом минимального элемента, формируя новый массив
+void Find_Min (int[,] array) 
+{
+  int min = array[0,0];
+  int ind_i = 0;
+  int ind_j = 0;
+  // найдем минимальный элемент массива и сохраним его индексы
+  // если элементов с минимальным значением несколько, программа сохраняет индексы первого из них.
+  for (int i = 0; i < array.GetLength(0); i++) //идем по строкам
+  {
+       for (int j = 0; j < array.GetLength(1); j++) // идем по столбцам
+       {
+           if (array[i,j] < min) 
+           {
+           min = array[i,j];
+           ind_i = i;
+           ind_j = j;
+           }
+       }
+  }
+  Console.WriteLine();
+  Console.WriteLine(min + " " + ind_i + " " + ind_j);
+
+  
+  //заполняем новый массив 
+ 
+  int [,] D_Sim = new int [array.GetLength(0),array.GetLength(1)-1]; //создали новый массив результата
+  
+  for (int i = 0; i < array.GetLength(0); i++) //идем по строкам первоначального массива
+  {
+             // в каждой строке первоначального массива идем по столбцам до удаляемого столбца
+             if (ind_j != 0) //если удаляемый столбец не с индексом 0, тк там по-другому цикл будет
+             {
+                 for(int j=0; j < ind_j; j++)
+                 {
+                   D_Sim[i,j] = array[i,j];
+              
+                 }
+                 
+                 //с удаляемого столбца игнорируем для записи в новый массив удаляемый столбец;
+                 //и с этого момента индекс столбцов в новом массиве будет на 1 меньше.
+                 for (int j = ind_j; j < array.GetLength(1)-1; j++ )
+                 {
+                     D_Sim[i,j] = array[i,j+1];
+
+                 }
+              } //конец условия if (ind_j != 0)
+              else if (ind_j == 0) //если удаляемый столбец нулевой
+              {
+                 for(int j=ind_j; j < array.GetLength(0); j++)
+                 {
+                   D_Sim[i,j] = array[i,j+1];
+              
+                 }
+               }
+ 
+   }//закончили работу со столбцов в i-той строкой в цикле по строкам
+
+
+Console.WriteLine("новый массив"); //выводим новый массив D_Sim
+for (int i = 0; i < D_Sim.GetLength(0); i++)
+  {
+    for (int j = 0; j < D_Sim.GetLength(1); j++)
+    {
+        Console.Write(D_Sim[i,j] + " ");
+    }
+    Console.WriteLine();
+  }
+
+} //конец метода, формирующего новый массив с удаленным столбцом
+
+
+
+
+Find_Min(Sim); // 4 задача*
+
+
+
+
 
 
 
