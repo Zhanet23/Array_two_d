@@ -1,6 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 static void PrintArray(int[,] table) // метод печает массив
@@ -153,15 +154,35 @@ int[,] Sim  = new int [new Random().Next(2,6),new Random().Next(2,6)];
 
 FillArray(Sim);
 PrintArray(Sim);
+//сделаем выбор задачи через case
+Console.WriteLine("Что Вы хотите сделать с массивом?");
+Console.WriteLine("Задача 1 (поиск элемента с введенным индексом)- нажмите 1,");
+Console.WriteLine("Задача 2 (поменять местами первую и последнюю строку в массиве) - нажмите 2");
+Console.WriteLine("задача 3 (нахождение строки с наименьшей суммой элементов) - нажмите -3,");
+Console.WriteLine("Задача 3.1 (нахождение всех строк с наименьшей суммой элементов) - нажмите 4");
+Console.WriteLine("Задача 4 (из этого массива удаляется строка и столбец, где расположен мин эл массива) - нажмите 5");
+int D = Convert.ToInt32(Console.ReadLine());
+if ((D >=1) && (D <=5))
+{   switch(D)
+    {
+       case 1: Find_Element(Sim); break;
+       case 2: Replase_Lines(Sim); break;
+       case 3: Find_Index(Sim); break;
+       case 4: Find_Index1(Sim); break;
+       case 5: Delete_Min(Sim); break;
+    }
+}
+else Console.WriteLine("Вы должны выбрать задачи от 1 до 5");
+
+
+
+
+
 //ЧТОБЫ ЗАПУСТИТЬ ЗАДАЧИ,НУЖНО УБРАТЬ КОММЕНТАРИЙ С ВЫЗОВА ЛЮБОГО МЕТОДА НИЖЕ
-
 //Find_Element(Sim);  // задача 1   (поиск элемента в рандомном массиве с вводимыми пользователем индексами)
-
 //Replase_Lines(Sim); // задача 2   (поменять местами первую и последнюю строку в массиве)
-
 //Find_Index(Sim);    // задача 3   (нахождение строки с наименьшей суммой элементов)
 //Find_Index1(Sim);   // Задача 3.1 (нахождение всех строк с наименьшей суммой элементов)
-
 //Delete_Min(Sim);    // задача 4*  (из заданного массива удаляется строка и столбец, где расположен мин эл массива)
 
 
